@@ -9,17 +9,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class RequestManager {
+public class RequestManagerAuth {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RequestManager.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestManagerAuth.class);
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private final ObjectMapper objectMapper;
 
-    public RequestManager() {
+    public RequestManagerAuth() {
         this.objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }

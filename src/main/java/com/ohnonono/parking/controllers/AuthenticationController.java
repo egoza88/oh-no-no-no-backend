@@ -1,8 +1,6 @@
 package com.ohnonono.parking.controllers;
 
-import com.ohnonono.parking.http.RequestManager;
 import com.ohnonono.parking.model.Credentials;
-import com.ohnonono.parking.response.model.EmptyJsonResponse;
 import com.ohnonono.parking.response.model.PinResponse;
 import com.ohnonono.parking.response.model.TokenResponse;
 import com.ohnonono.parking.service.AuthenticationService;
@@ -28,7 +26,7 @@ public class AuthenticationController {
 
     @PostMapping("/logout")
     @ApiOperation(value = "Close all existing sessions for the authenticated user", notes = "Close all existing sessions for the authenticated user. You obtain the authorization token needed to execute the request using POST", response = String.class)
-    HttpStatus login(@RequestHeader("X-authSessionId") String token) {
+    HttpStatus logout(@RequestHeader("X-authSessionId") String token) {
         return HttpStatus.OK;
     }
 

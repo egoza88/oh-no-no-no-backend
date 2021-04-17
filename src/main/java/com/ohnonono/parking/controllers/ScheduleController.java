@@ -1,6 +1,5 @@
 package com.ohnonono.parking.controllers;
 
-import com.ohnonono.parking.response.model.PinResponse;
 import com.ohnonono.parking.response.model.TabletScheduleResponse;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.sql.Timestamp;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/schedule")

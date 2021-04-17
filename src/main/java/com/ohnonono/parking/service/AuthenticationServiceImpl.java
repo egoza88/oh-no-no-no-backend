@@ -1,7 +1,8 @@
 package com.ohnonono.parking.service;
 
+import com.ohnonono.parking.PinDB;
 import com.ohnonono.parking.dto.AuthResponse;
-import com.ohnonono.parking.http.RequestManager;
+import com.ohnonono.parking.http.RequestManagerAuth;
 import com.ohnonono.parking.model.Credentials;
 import com.ohnonono.parking.response.model.PinResponse;
 import com.ohnonono.parking.response.model.TokenResponse;
@@ -14,12 +15,14 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
-    private RequestManager requestManager;
+    private RequestManagerAuth requestManagerAuth;
+
+    private PinDB pinDB = new PinDB();
 
     @Override
     public ResponseEntity<TokenResponse> getAuthToken(Credentials credentials) {
-        AuthResponse response = requestManager.getAuthToken(credentials.getEmail(), credentials.getPassword());
-        String role = requestManager.getRole(response.getAuthSessionId());
+        AuthResponse response = requestManagerAuth.getAuthToken(credentials.getEmail(), credentials.getPassword());
+        String role = requestManagerAuth.getRole(response.getAuthSessionId());
 
         if(!response.isSuccess()) {
             return new ResponseEntity<>(
@@ -36,11 +39,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public PinResponse getPin(String token) {
-        return new PinResponse();
+        if(!pinDB.hasPin(token)) {
+            return new PinResponse();
+        }
+        return new PinResponse(pinDB.getPin(token));
     }
 
     @Override
     public PinResponse generatePin(String token) {
-        return new PinResponse("4321");
+        if(pinDB.hasPin(token)) {
+            return new PinResponse(pinDB.getPin(token));
+        }
+        return new PinResponse(pinDB.generatePin(token));
     }
 }
