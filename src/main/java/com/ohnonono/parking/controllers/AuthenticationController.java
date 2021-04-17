@@ -32,15 +32,15 @@ public class AuthenticationController {
 
     @GetMapping("/pin")
     @ApiOperation(value = "Get user's pin", notes = "Return pin if it exists, empty string otherwise", response = String.class)
-    ResponseEntity<PinResponse> getPin(@RequestHeader("X-authSessionId") String token) {
-        PinResponse pinResponse = authenticationService.getPin(token);
+    ResponseEntity<PinResponse> getPin(@RequestHeader("X-authSessionId") String token, String username) {
+        PinResponse pinResponse = authenticationService.getPin(username);
         return new ResponseEntity<>(pinResponse, HttpStatus.OK);
     }
 
     @PostMapping("/generatePin")
     @ApiOperation(value = "Generate user's pin", notes = "Return pin if it created successfully, empty string otherwise", response = String.class)
-    ResponseEntity<PinResponse> generatePin(@RequestHeader("X-authSessionId") String token) {
-        PinResponse pinResponse = authenticationService.generatePin(token);
+    ResponseEntity<PinResponse> generatePin(@RequestHeader("X-authSessionId") String token, String username) {
+        PinResponse pinResponse = authenticationService.generatePin(username);
         return new ResponseEntity<>(pinResponse, HttpStatus.OK);
     }
 }

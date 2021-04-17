@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 public interface AuthenticationService {
     ResponseEntity<TokenResponse> getAuthToken(Credentials credentials);
 
-    PinResponse getPin(String token);
+    PinResponse getPin(String username);
 
-    PinResponse generatePin(String token);
+    PinResponse generatePin(String username);
 }

@@ -38,18 +38,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public PinResponse getPin(String token) {
-        if(!pinDB.hasPin(token)) {
+    public PinResponse getPin(String username) {
+        if(!pinDB.hasPin(username)) {
             return new PinResponse();
         }
-        return new PinResponse(pinDB.getPin(token));
+        return new PinResponse(pinDB.getPin(username));
     }
 
     @Override
-    public PinResponse generatePin(String token) {
-        if(pinDB.hasPin(token)) {
-            return new PinResponse(pinDB.getPin(token));
+    public PinResponse generatePin(String username) {
+        if(pinDB.hasPin(username)) {
+            return new PinResponse(pinDB.getPin(username));
         }
-        return new PinResponse(pinDB.generatePin(token));
+        return new PinResponse(pinDB.generatePin(username));
     }
 }
